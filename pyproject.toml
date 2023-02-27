@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "mafia_allocation"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 argparse = "^1.4.0"
 
 
