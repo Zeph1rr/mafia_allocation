@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "mafia-allocation"
+version = "0.1.0"
+description = ""
+authors = ["zeph1rr <grianton535@gmail.com>"]
+readme = "README.md"
+packages = [{include = "mafia_allocation"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+argparse = "^1.4.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+pre-commit = "^3.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
