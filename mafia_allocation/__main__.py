@@ -5,7 +5,7 @@ from . import Allocator
 
 
 def parse_file(filepath: str) -> List[str]:
-    with open(filepath) as file:
+    with open(filepath, encoding='utf-8') as file:
         lines = file.readlines()
         if len(lines) % 10 != 0:
             raise ValueError("Количество игроков должно быть кратно 10")
@@ -45,7 +45,6 @@ def main():
     )
 
     allocator = Allocator(players, tournament_name)
-    print(allocator.ot_get_allocation_once())
     allocation = allocator.ot_get_allocation_for_all_games(games_count)
     allocator.dump_allocation(allocation)
 

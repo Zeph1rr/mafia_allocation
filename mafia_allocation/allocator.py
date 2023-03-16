@@ -23,9 +23,15 @@ class Allocator:
         return result
 
     def dump_allocation(self, allocation: dict[int, List[str]]):
+        allocation_data = ""
+        for game in allocation.keys():
+            allocation_data += "=" * 3 + f"Игра #{game} " + "=" * 3 + "\n" * 2
+            for index, player in enumerate(allocation[game]):
+                allocation_data += f"{index + 1}. {player}" + '\n'
+            allocation_data += '\n'
         try:
-            with open(os.path.join("result", f"{self.tournament}.txt"), "w") as file:
-                json.dump(allocation, file, indent=4, ensure_ascii=False)
+            with open(os.path.join("result", f"{self.tournament}.txt"), "w", encoding='UTF-8') as file:
+                file.write(allocation_data)
         except FileNotFoundError:
             os.mkdir("result")
             self.dump_allocation(allocation)
