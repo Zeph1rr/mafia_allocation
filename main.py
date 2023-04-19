@@ -1,7 +1,7 @@
 import argparse
 from typing import List
 
-from . import Allocator
+from mafia_allocation import Allocator
 
 
 def parse_file(filepath: str) -> List[str]:
