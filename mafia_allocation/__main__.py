@@ -16,7 +16,12 @@ def parse_file(filepath: str) -> List[str]:
 
 
 def get_players_from_stdin():
-    return [input(f"Player #{i + 1}: ") for i in range(10)]
+    players_count = int(input("Количество игроков: "))
+    while players_count % 10 != 0:
+        players_count = int(
+            input("Количество игроков должно быть кратно 10! Количество игроков: ")
+        )
+    return [input(f"Player #{i + 1}: ") for i in range(players_count)]
 
 
 def main():
@@ -39,9 +44,9 @@ def main():
     args = parser.parse_args()
 
     players = parse_file(args.file) if args.file else get_players_from_stdin()
-    games_count = args.game_count if args.game_count else int(input("Games count: "))
+    games_count = args.game_count if args.game_count else int(input("Количество игр: "))
     tournament_name = (
-        args.tournament_name if args.tournament_name else input("Tournament: ")
+        args.tournament_name if args.tournament_name else input("Название турнира: ")
     )
 
     allocator = Allocator(players, tournament_name)
