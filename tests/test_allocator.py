@@ -10,11 +10,11 @@ def test_allocator_raises_value_error(random_list):
 
 
 def test_ot_get_allocation_once(allocator):
-    assert type(allocator.ot_get_allocation_once()) == list
-    assert allocator.ot_get_allocation_once() != allocator.ot_get_allocation_once()
+    assert type(allocator.get_allocation_once()) == list
+    assert allocator.get_allocation_once() != allocator.get_allocation_once()
 
 
 def test_ot_get_allocation_for_all_games(allocator):
-    result = allocator.ot_get_allocation_for_all_games(2)
+    result = allocator.get_allocation_for_all_games(2)
     assert type(result) == dict
     assert result[1] != result[2]
