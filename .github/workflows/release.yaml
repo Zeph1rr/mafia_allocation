@@ -30,17 +30,19 @@ jobs:
         run: poetry run pytest -v
 
       - name: Set environment variables
+        shell: powershell
         run: |
-          set REPO_NAME=%GITHUB_REPOSITORY:*/=%
-          set RELEASE_VERSION=%GITHUB_REF:refs/*/=%
-          echo "REPO_NAME=%REPO_NAME%" >> $GITHUB_ENV
-          echo "RELEASE_VERSION=%RELEASE_VERSION%" >> $GITHUB_ENV
+          $env:REPO_NAME = $env:GITHUB_REPOSITORY -replace '^.*/'
+          $env:RELEASE_VERSION = $env:GITHUB_REF -replace '^refs/tags/'
+          echo "REPO_NAME=$env:REPO_NAME" >> $env:GITHUB_ENV
+          echo "RELEASE_VERSION=$env:RELEASE_VERSION" >> $env:GITHUB_ENV
 
       - name: Build binary
+        shell: powershell
         run: |
-          set BINARY_NAME=%REPO_NAME%-%RELEASE_VERSION%
-          echo BINARY_NAME=%BINARY_NAME%
-          poetry run pyinstaller -F --name %BINARY_NAME% main.py
+          $binaryName = "$env:REPO_NAME-$env:RELEASE_VERSION"
+          echo "BINARY_NAME=$binaryName"
+          poetry run pyinstaller -F --name $binaryName main.py
 
       - uses: ncipollo/release-action@v1
         with:
