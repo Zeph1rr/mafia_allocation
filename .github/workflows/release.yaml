@@ -25,7 +25,6 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install poetry
           poetry install
-          poetry add pyinstaller
 
       - name: Run tests
         run: poetry run pytest -v
@@ -40,9 +39,10 @@ jobs:
       - name: Build binary
         run: |
           set BINARY_NAME=%REPO_NAME%-%RELEASE_VERSION%
-          poetry run pyinstaller -F --name "%BINARY_NAME%" main.py
+          echo BINARY_NAME=%BINARY_NAME%
+          poetry run pyinstaller -F --name %BINARY_NAME% main.py
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/mafia_allocation-*"
+          artifacts: "dist\\mafia_allocation-*"
           bodyFile: "CHANGELOG.md"
